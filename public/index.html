@@ -37,14 +37,30 @@
     <main class="main">
       <section class="main__control control container">
         <h1 class="control__title">TASKMANAGER</h1>
-        <!-- Меню -->
+        <menu></menu>
       </section>
+  
+      <search></search>
+  
+      <filter></filter>
 
-      <!-- Поиск -->
-
-      <!-- Фильтры -->
-
-      <!-- Контент -->
+      <section class="board container">
+        <div class="board__filter-list">
+          <a href="#" class="board__filter">SORT BY DEFAULT</a>
+          <a href="#" class="board__filter">SORT BY DATE up</a>
+          <a href="#" class="board__filter">SORT BY DATE down</a>
+        </div>
+    
+        <div class="board__tasks">
+          <cardEdit></cardEdit>
+          <card></card>
+          <card></card>
+          <card></card>
+        </div>
+  
+        <loadMore></loadMore>
+      </section>
     </main>
+    <script src="../src/main.js"></script>
   </body>
 </html>
