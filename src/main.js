@@ -1,7 +1,14 @@
 "use strict";
 
 document.addEventListener(`DOMContentLoaded`, () => {
-
+  /**
+   * utils Времменый обьект для хранения служебных функций
+   *
+   * @type {{collectionsToString: (function(*): string)}}
+   */
+  const utils = {
+    collectionsToString: (collections) => [...collections].map((i) => i.outerHTML).join(``),
+  };
   const getMenu = () => {
     return `<section class="control__btn-wrap">
           <input
@@ -406,18 +413,47 @@ document.addEventListener(`DOMContentLoaded`, () => {
   const getLoadMore = () => {
     return `<button class="load-more" type="button">load more</button>`;
   };
+  const getControl = (insertComponent) => {
+    return `<section class="main__control control container">
+        <h1 class="control__title">TASKMANAGER</h1>
+        ${insertComponent}
+      </section>`;
+  };
+  const getFilterList = () => {
+    return `<div class="board__filter-list">
+          <a href="#" class="board__filter">SORT BY DEFAULT</a>
+          <a href="#" class="board__filter">SORT BY DATE up</a>
+          <a href="#" class="board__filter">SORT BY DATE down</a>
+        </div>`;
+  };
+  const getTaskList = (insertComponent) => {
+    return ` <div class="board__tasks">
+           ${insertComponent}
+        </div>`;
+  };
+  const getBoard = (insertComponent) => {
+    return `<section class="board container">
+        ${insertComponent}
+      </section>`;
+  };
 
   const renderComponent = (tag, template) => {
     document.querySelectorAll(tag).forEach((i) => {
-      i.outerHTML = template;
+      i.insertAdjacentHTML(`afterend`, template(utils.collectionsToString(i.children)));
+      i.remove();
     });
   };
 
-  renderComponent(`menu`, getMenu());
-  renderComponent(`search`, getSearch());
-  renderComponent(`filter`, getFilter());
-  renderComponent(`card`, getCard());
-  renderComponent(`cardEdit`, getCardEdit());
-  renderComponent(`loadMore`, getLoadMore());
+  renderComponent(`control`, getControl);
+  renderComponent(`menu`, getMenu);
+  renderComponent(`board`, getBoard);
+  renderComponent(`search`, getSearch);
+  renderComponent(`filter`, getFilter);
+  renderComponent(`taskList`, getTaskList);
+  renderComponent(`card`, getCard);
+  renderComponent(`cardEdit`, getCardEdit);
+  renderComponent(`filterList`, getFilterList);
+  renderComponent(`loadMore`, getLoadMore);
+
 
 });
