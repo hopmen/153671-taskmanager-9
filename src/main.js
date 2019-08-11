@@ -2,11 +2,11 @@
 
 'use strict';
 
-const render = (container, template, place) => {
+const render = (container, template, place = `beforeend`) => {
   container.insertAdjacentHTML(place, template);
 };
 
-const createSiteMenuTemplate = () => {
+const getSiteMenuTemplate = () => {
   return `<section class="control__btn-wrap">
     <input
       type="radio"
@@ -37,7 +37,7 @@ const createSiteMenuTemplate = () => {
   </section>`;
 };
 
-const createSearchTemplate = () => {
+const getSearchTemplate = () => {
   return `<section class="main__search search container">
     <input
       type="text"
@@ -49,7 +49,7 @@ const createSearchTemplate = () => {
   </section>`;
 };
 
-const createFilterTemplate = () => {
+const getFilterTemplate = () => {
   return `<section class="main__filter filter container">
     <input
       type="radio"
@@ -120,13 +120,13 @@ const createFilterTemplate = () => {
   </section>`;
 };
 
-const createBoardTemplate = () => {
+const getBoardTemplate = () => {
   return `<section class="board container">
     <div class="board__tasks"></div>
   </section>`;
 };
 
-const createSortingTemplate = () => {
+const getSortingTemplate = () => {
   return `<div class="board__filter-list">
     <a href="#" class="board__filter">SORT BY DEFAULT</a>
     <a href="#" class="board__filter">SORT BY DATE up</a>
@@ -134,7 +134,7 @@ const createSortingTemplate = () => {
   </div>`;
 };
 
-const createTaskEditTemplate = () => {
+const getTaskEditTemplate = () => {
   return `<article class="card card--edit card--yellow card--repeat">
     <form class="card__form" method="get">
       <div class="card__inner">
@@ -404,7 +404,7 @@ const createTaskEditTemplate = () => {
   </article>`;
 };
 
-const createTaskTemplate = () => {
+const getTaskTemplate = () => {
   return `<article class="card card--black">
     <div class="card__form">
       <div class="card__inner">
@@ -472,24 +472,26 @@ const createTaskTemplate = () => {
   </article>`;
 };
 
-const createLoadMoreButtonTemplate = () => {
+const getLoadMoreButtonTemplate = () => {
   return `<button class="load-more" type="button">load more</button>`;
 };
 
 const siteMainElement = document.querySelector(`.main`);
 const siteHeaderElement = siteMainElement.querySelector(`.main__control`);
 
-render(siteHeaderElement, createSiteMenuTemplate(), `beforeend`);
-render(siteMainElement, createSearchTemplate(), `beforeend`);
-render(siteMainElement, createFilterTemplate(), `beforeend`);
-render(siteMainElement, createBoardTemplate(), `beforeend`);
+render(siteHeaderElement, getSiteMenuTemplate());
+render(siteMainElement, getSearchTemplate());
+render(siteMainElement, getFilterTemplate());
+render(siteMainElement, getBoardTemplate());
 
 const boardElement = siteMainElement.querySelector(`.board`);
 const taskListElement = siteMainElement.querySelector(`.board__tasks`);
 
-render(boardElement, createSortingTemplate(), `afterbegin`);
-render(taskListElement, createTaskEditTemplate(), `beforeend`);
+render(boardElement, getSortingTemplate(), `afterbegin`);
+render(taskListElement, getTaskEditTemplate());
 
-new Array(3).fill(``).forEach(() => render(taskListElement, createTaskTemplate(), `beforeend`));
+for (let count = 3; count >= 0; count--) {
+  render(taskListElement, getTaskTemplate());
+}
 
-render(boardElement, createLoadMoreButtonTemplate(), `beforeend`);
+render(boardElement, getLoadMoreButtonTemplate());
