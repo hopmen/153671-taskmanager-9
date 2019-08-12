@@ -1,7 +1,3 @@
-// main.js
-
-'use strict';
-
 import {getSiteMenuTemplate} from "./components/menu";
 import {getSearchTemplate} from "./components/search";
 import {getFilterTemplate} from "./components/filter";
