@@ -6,9 +6,20 @@ import {getSortingTemplate} from "./components/sorting";
 import {getTaskEditTemplate} from "./components/task-edit";
 import {getTaskTemplate} from "./components/task";
 import {getLoadMoreButtonTemplate} from "./components/more-button";
+import {task} from "./data";
+
+const TASK_COUNT = 3;
 
 const render = (container, template, place = `beforeend`) => {
   container.insertAdjacentHTML(place, template);
+};
+
+const renderTasks = (container, count) => {
+  container.insertAdjacentHTML(`beforeend`, new Array(count)
+    .fill(``)
+    .map(task)
+    .map(getTaskTemplate)
+    .join(``));
 };
 
 const siteMainElement = document.querySelector(`.main`);
@@ -22,11 +33,10 @@ render(siteMainElement, getBoardTemplate());
 const boardElement = siteMainElement.querySelector(`.board`);
 const taskListElement = siteMainElement.querySelector(`.board__tasks`);
 
+
 render(boardElement, getSortingTemplate(), `afterbegin`);
 render(taskListElement, getTaskEditTemplate());
 
-for (let count = 3; count >= 0; count--) {
-  render(taskListElement, getTaskTemplate());
-}
+renderTasks(taskListElement, TASK_COUNT);
 
 render(boardElement, getLoadMoreButtonTemplate());
