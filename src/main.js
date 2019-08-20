@@ -6,7 +6,7 @@ import {getSortingTemplate} from "./components/sorting";
 import {getTaskEditTemplate} from "./components/task-edit";
 import {getTaskTemplate} from "./components/task";
 import {getLoadMoreButtonTemplate} from "./components/more-button";
-import {task} from "./data";
+import {getDataTask} from "./storage";
 
 const TASK_COUNT = 3;
 
@@ -17,7 +17,7 @@ const render = (container, template, place = `beforeend`) => {
 const renderTasks = (container, count) => {
   container.insertAdjacentHTML(`beforeend`, new Array(count)
     .fill(``)
-    .map(task)
+    .map(getDataTask)
     .map(getTaskTemplate)
     .join(``));
 };
