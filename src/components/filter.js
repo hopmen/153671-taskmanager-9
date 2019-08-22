@@ -4,7 +4,6 @@ export const getFilterTemplate = (filtersData) => {
     return acc;
   }, {});
   const {all, overdue, today, favorites, repeating, tags, archive} = filtersDataObj;
-  console.log(filtersDataObj);
   return `<section class="main__filter filter container">
     <input
       type="radio"
