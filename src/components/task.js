@@ -1,5 +1,5 @@
 export const getTaskTemplate = ({description, dueDate, repeatingDays, tags, color}) => {
-  return `<article class="card card--${color} ${Object.keys(repeatingDays).some(day => repeatingDays[day]) ? `card--repeat` : ``}">
+  return `<article class="card card--${color} ${Object.keys(repeatingDays).some((day) => repeatingDays[day]) ? `card--repeat` : ``}">
     <div class="card__form">
       <div class="card__inner">
         <div class="card__control">
