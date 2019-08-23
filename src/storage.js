@@ -1,41 +1,47 @@
-const randomInteger = (...round) => {
-  let [min, max] = round[1] ? [round[0], round[1]] : [0, round[0]];
+const randomInteger = (min, max) => {
   return Math.floor(min + Math.random() * (max + 1 - min));
 };
 
 const randomBoolean = () => Boolean(Math.round(Math.random()));
 
+const getRandomValue = (array) => array[Math.floor((Math.random() * array.length))];
+
+const description = [
+  `Изучить теорию`,
+  `Сделать домашку`,
+  `Пройти интенсив на соточку`];
+const repeatingDays = {
+  'mo': false,
+  'tu': false,
+  'we': randomBoolean(),
+  'th': false,
+  'fr': false,
+  'sa': false,
+  'su': false,
+};
+const tags = new Set([
+  `homework`,
+  `theory`,
+  `practice`,
+  `intensive`,
+  `keks`,
+]);
+const color = [
+  `black`,
+  `yellow`,
+  `blue`,
+  `green`,
+  `pink`,
+];
+const week = 7 * 24 * 60 * 60 * 1000;
 const getDataTask = () => ({
-  description: [
-    `Изучить теорию`,
-    `Сделать домашку`,
-    `Пройти интенсив на соточку`][randomInteger(3)],
-  dueDate: Date.now() + 1 + Math.floor(Math.random() * 7) * 24 * 60 * 60 * 1000,
-  repeatingDays: {
-    'mo': false,
-    'tu': false,
-    'we': randomBoolean(),
-    'th': false,
-    'fr': false,
-    'sa': false,
-    'su': false,
-  },
-  tags: new Set([
-    `homework`,
-    `theory`,
-    `practice`,
-    `intensive`,
-    `keks`,
-  ]),
-  color: [
-    `black`,
-    `yellow`,
-    `blue`,
-    `green`,
-    `pink`,
-  ][randomInteger(5)],
-  isFavorite: randomBoolean(),
-  isArchive: randomBoolean(),
+  description: getRandomValue(description),
+  dueDate: getRandomValue([Date.now() - week, Date.now() + week]),
+  repeatingDays,
+  tags,
+  color: getRandomValue(color),
+  isFavorite: getRandomValue([true, false]),
+  isArchive: getRandomValue([true, false]),
 });
 const getDataFilter = (tasks) => {
   let filters = [`all`, `overdue`, `today`, `favorites`, `repeating`, `tags`, `archive`];
