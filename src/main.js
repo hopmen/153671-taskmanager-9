@@ -6,7 +6,14 @@ import {getSortingTemplate} from "./components/sorting";
 import {getTaskEditTemplate} from "./components/task-edit";
 import {getTaskTemplate} from "./components/task";
 import {getLoadMoreButtonTemplate} from "./components/more-button";
-import {filters, tasks} from "./storage";
+import {getRandomInteger} from "./utils";
+import {getDataFilter} from "./storage/filters";
+import {getDataTask} from "./storage/tasks";
+
+const TASK_COUNT_MIN = 1;
+const TASK_COUNT_MAX = 81;
+const tasks = new Array(getRandomInteger(TASK_COUNT_MIN, TASK_COUNT_MAX)).fill(``).map(() => getDataTask());
+const filters = getDataFilter(tasks);
 
 let tasksForLoad = tasks;
 const firstLoadTask = 7;
