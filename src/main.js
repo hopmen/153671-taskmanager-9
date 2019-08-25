@@ -16,8 +16,9 @@ const tasks = new Array(getRandomInteger(TASK_COUNT_MIN, TASK_COUNT_MAX)).fill(`
 const filters = getDataFilter(tasks);
 
 let tasksForLoad = tasks;
-const firstLoadTask = 7;
-const buttonLoadTask = 8;
+const FIRST_LOAD_TASK = 7;
+const BUTTON_LOAD_TASK = 8;
+
 const render = (container, template, place = `beforeend`) => {
   container.insertAdjacentHTML(place, template);
 };
@@ -46,13 +47,13 @@ const taskListElement = siteMainElement.querySelector(`.board__tasks`);
 render(boardElement, getSortingTemplate(), `afterbegin`);
 render(taskListElement, getTaskEditTemplate());
 
-renderTasks(taskListElement, firstLoadTask);
+renderTasks(taskListElement, FIRST_LOAD_TASK);
 
 render(boardElement, getLoadMoreButtonTemplate());
 
 const loadMoreButton = document.querySelector(`.load-more`);
 const loadMoreButtonHandler = () => {
-  renderTasks(taskListElement, buttonLoadTask);
+  renderTasks(taskListElement, BUTTON_LOAD_TASK);
   if (tasksForLoad.length === 0) {
     loadMoreButton.removeEventListener(`click`, loadMoreButtonHandler);
     loadMoreButton.remove();

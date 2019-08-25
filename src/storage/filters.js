@@ -1,13 +1,16 @@
 const getDataFilter = (tasks) => {
-  let filters = [`all`, `overdue`, `today`, `favorites`, `repeating`, `tags`, `archive`];
 
   const today = new Date();
   const now = today.getTime();
-
-  const statistics = filters.reduce((acc, cur) => {
-    acc[cur] = 0;
-    return acc;
-  }, {});
+  const statistics = {
+    'all': 0,
+    'overdue': 0,
+    'today': 0,
+    'favorites': 0,
+    'repeating': 0,
+    'tags': 0,
+    'archive': 0,
+  };
 
   for (const task of tasks) {
     statistics[`all`]++;
