@@ -28,6 +28,7 @@ const color = [
   `pink`,
 ];
 const week = 7 * 24 * 60 * 60 * 1000;
+console.log(getRandomInteger([Date.now() - week, Date.now() + week]));
 const getDataTask = () => ({
   description: getRandomValue(description),
   dueDate: getRandomInteger([Date.now() - week, Date.now() + week]),
