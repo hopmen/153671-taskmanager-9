@@ -1,5 +1,14 @@
-export const getTaskTemplate = ({description, dueDate, repeatingDays, tags, color}) => {
-  return `<article class="card card--${color} ${Object.keys(repeatingDays).some((day) => repeatingDays[day]) ? `card--repeat` : ``}">
+export default class getTaskTemplate {
+  constructor({description, dueDate, repeatingDays, tags, color}) {
+    this._description = description;
+    this._dueDate = dueDate;
+    this._repeatingDays = repeatingDays;
+    this._tags = tags;
+    this._color = color;
+  }
+
+  getTemplate() {
+    return `<article class="card card--${this._color} ${Object.keys(this._repeatingDays).some((day) => this._repeatingDays[day]) ? `card--repeat` : ``}">
     <div class="card__form">
       <div class="card__inner">
         <div class="card__control">
@@ -24,7 +33,7 @@ export const getTaskTemplate = ({description, dueDate, repeatingDays, tags, colo
         </div>
 
         <div class="card__textarea-wrap">
-          <p class="card__text">${description}</p>
+          <p class="card__text">${this._description}</p>
         </div>
 
         <div class="card__settings">
@@ -32,7 +41,7 @@ export const getTaskTemplate = ({description, dueDate, repeatingDays, tags, colo
             <div class="card__dates">
               <div class="card__date-deadline">
                 <p class="card__input-deadline-wrap">
-                  <span class="card__date">${new Date(dueDate).toDateString()}</span>
+                  <span class="card__date">${new Date(this._dueDate).toDateString()}</span>
                   <span class="card__time">11:15 PM</span>
                 </p>
               </div>
@@ -40,7 +49,7 @@ export const getTaskTemplate = ({description, dueDate, repeatingDays, tags, colo
 
             <div class="card__hashtag">
               <div class="card__hashtag-list">
-                ${Array.from(tags).map((tag) => `<span class="card__hashtag-inner">
+                ${Array.from(this._tags).map((tag) => `<span class="card__hashtag-inner">
                   <span class="card__hashtag-name">
                     #${tag}
                   </span>
@@ -52,4 +61,6 @@ export const getTaskTemplate = ({description, dueDate, repeatingDays, tags, colo
       </div>
     </div>
   </article>`.trim();
-};
+
+  }
+}
